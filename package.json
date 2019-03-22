@@ -1,0 +1,66 @@
+{
+  "name": "webshot",
+  "productName": "MVP App 0.0.1",
+  "version": "0.0.1",
+  "description": "A minimal application with Powah!",
+  "author": {
+    "name": "Name",
+    "email": "email@website.com",
+    "url": "http://www.website.com/"
+  },
+  "license": "CC0-1.0",
+  "repository": "https://github.com/MonetizeDesignTeam/webshot",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "export MOCHA=true; DEBUG=true mocha tests --no-timeouts --bail; unset MOCHA",
+    "build": "electron-builder",
+    "release": "build",
+    "readme": "node ./node_modules/.bin/node-readme"
+  },
+  "build": {
+    "asar": true,
+    "asarUnpack": "node_modules/puppeteer/.local-chromium/**/*"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "devtron": "^1.4.0",
+    "electron": "4.0.6",
+    "electron-builder": "^20.39.0",
+    "electron-publisher-s3": "^20.17.2",
+    "electron-rebuild": "^1.8.4",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "mocha": "^5.2.0",
+    "mocha-junit-reporter": "^1.18.0",
+    "mocha-multi-reporters": "^1.1.7",
+    "mocha-reporter": "^0.1.1",
+    "node-readme": "^0.1.9",
+    "spectron": "^3.8.0",
+    "standard": "^11.0.1"
+  },
+  "dependencies": {
+    "capitalize": "^1.0.0",
+    "capture-electron": "^3.0.1",
+    "dotenv": "^5.0.1",
+    "electron-context-menu": "^0.9.1",
+    "electron-drag": "^1.2.2",
+    "electron-is-dev": "^0.3.0",
+    "electron-store": "^1.3.0",
+    "electron-updater": "4.0.8",
+    "google-search-results-nodejs": "^0.1.0",
+    "jquery": "^3.3.1",
+    "jquery-bridget": "^2.0.1",
+    "masonry-layout": "^4.2.2",
+    "moment": "^2.24.0",
+    "mousetrap": "^1.6.3",
+    "numeral": "^2.0.6",
+    "perfy": "^1.1.5",
+    "pluralize": "^7.0.0",
+    "puppeteer": "^1.13.0"
+  }
+}
