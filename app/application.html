@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='stylesheets/fontawesome/css/fontawesome.min.css'>
+    <link rel='stylesheet' href='stylesheets/semantic.min.css'>
+    <link rel='stylesheet' href='stylesheets/application.css'>
+  </head>
+  <body>
+   
+    <div style="padding: 20px;">
+
+        <div class="ui segment raised">
+            <div class="ui grid">
+              <div class="twelve wide column">
+                  <div class="ui icon input fluid">
+                      <input type="text" id="website" placeholder="https://www.example.com/">
+                      <i class="fas fa-search" style="margin-top: 12px;margin-left: -24px"></i>
+                  </div>
+              </div>
+              <div class="four wide column">
+                  <button class="ui button blue fluid" id="screenshot-website">Take Screenshot</button>
+              </div>
+            </div>
+        </div>
+        <div class="ui horizontal divider">
+            Results
+          </div>
+        <div class="ui segment raised">
+            <div class="ui bulleted list" id="progress-list"></div>
+        </div>
+
+    </div>
+
+    <!-- <div class="grid">
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/captifire-com-jv.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/engagifire-com-jv.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/fbmastersprogram-com-jv-partners.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/go-jaykaydowdall-com-funnelize-jv.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/jv-videlligence-com.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/mehditihani-convertri-com.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/mymailit-com-jv.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/parallelprofits-com-jv.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/realspecific-com-jv.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/socijam-com-jv.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/storelessjv-com.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/targetingacademy-com-jv.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/themehunk-com-jv-sales-page.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/trendycom-co-jv.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/videomakerfx-com-jv.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/videopaljv-com.png"></div></div>
+    <div class="grid-item"><div class="inner-img"><img src="../demo-images/thumbnails/youzign-com-jv.png"></div></div>
+    </div> -->
+
+    <script>
+      // Environment Variables from .env file
+      require('dotenv').config()
+
+      // Electron
+      const { ipcRenderer } = require('electron')
+      const dialog = require('electron').remote.dialog
+      const path = require('path')
+      const fs = require('fs')
+      const isDev = require('electron-is-dev')
+
+      // Screenshots
+
+
+      const puppeteer = require('puppeteer')
+
+
+function getChromiumExecPath() {
+  return puppeteer.executablePath().replace('app.asar', 'app.asar.unpacked');
+}
+
+const browser =  puppeteer.launch({executablePath: getChromiumExecPath()});
+
+      const gsr = require('google-search-results-nodejs')
+      const serp = new gsr.GoogleSearchResults("1ea2640e12fd2b9e7a7f5e08f4b0152f1a3d82256fe1360ecdf53986d68d765a")
+      const nativeImage = require('electron').nativeImage
+
+      // App Version
+      const appVersion = require('../package.json').version
+
+      // Load jQuery
+      window.$ = window.jQuery = require('jquery')
+
+      // Masonry
+      var jQueryBridget = require('jquery-bridget');
+      var Masonry = require("masonry-layout")
+      jQueryBridget( 'masonry', Masonry, $ );
+
+      // Test Performane of Functions --> https://github.com/onury/perfy
+      // const perfy = require('perfy')
+
+      // Storage
+      const Store = require('electron-store')
+      const store = new Store()
+
+      store.set('myFolderPath', dialog.showOpenDialog({ properties: ['openDirectory'] })[0])
+      const FOLDER_PATH = store.get('myFolderPath')
+
+      fs.mkdir(`${FOLDER_PATH}/fullsize`, function (err) {})
+      fs.mkdir(`${FOLDER_PATH}/thumbnails`, function (err) {})
+
+      console.log(FOLDER_PATH)
+
+      // Clear storage on test
+      if (process.env.MOCHA) { // --> clear storage if tests
+        store.clear()
+      }
+
+      // Dates, Numbers and Strings
+      const moment = require('moment')
+      const numeral = require('numeral')
+      const pluralize = require('pluralize')
+      const capitalize = require('capitalize')
+
+      // General Components
+      const component = require(path.join(__dirname, 'javascripts/components'))
+
+      // Views
+      const example_view = fs.readFileSync(path.join(__dirname, 'views/example.html'), 'utf8')
+
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
+  </body>
+</html>

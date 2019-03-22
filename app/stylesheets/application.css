@@ -1,0 +1,25 @@
+/* Stylesheet */
+body {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #228ae6;
+}
+
+.grid-item {
+  width: 140px
+}
+
+.grid-item .inner-img {
+  padding: 5px;
+}
+
+.grid-item .inner-img img {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3)
+}
