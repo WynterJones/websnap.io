@@ -1,13 +1,35 @@
 /* Stylesheet */
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 0;
   margin: 0;
+  background: rgba(0, 0, 0, 0.35);
+  overflow: hidden;
 }
 
 a {
   text-decoration: none;
   color: #228ae6;
+}
+
+header {
+  padding: 20px;
+}
+
+#app {
+  height: 100%;
+  background: #fafafa;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+#website {
+  font-weight: bold;
+  font-size: 1.1em
 }
 
 .grid-item {
