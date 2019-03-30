@@ -20,11 +20,11 @@ const getWindowPosition = () => {
 }
 
 function createWindow () {
-  const iconPath = path.join(__dirname, './tray-icon.png')
+  const iconPath = path.join(__dirname, './tray-icon-white.png')
   let trayIcon = nativeImage.createFromPath(iconPath)
   trayIcon = trayIcon.resize({ width: 16, height: 16 })
   tray = new Tray(trayIcon)
-  mainWindow = new BrowserWindow({width: 400, height: 80, transparent: true, frame: false, resizable: false })
+  mainWindow = new BrowserWindow({width: 600, height: 80, transparent: true, frame: false, resizable: false })
   mainWindow.hide()
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'app/application.html'),
