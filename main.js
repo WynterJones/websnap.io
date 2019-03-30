@@ -7,9 +7,13 @@ const path = require('path')
 const url = require('url')
 const isDev = require('electron-is-dev')
 const autoUpdater = require('electron-updater').autoUpdater
+let mainWindow, tray
+
 require('dotenv').config()
 require('electron-context-menu')({})
-let mainWindow, tray
+
+// disaply security warnings
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 const getWindowPosition = () => {
   const windowBounds = mainWindow.getBounds()
@@ -24,7 +28,16 @@ function createWindow () {
   let trayIcon = nativeImage.createFromPath(iconPath)
   trayIcon = trayIcon.resize({ width: 16, height: 16 })
   tray = new Tray(trayIcon)
-  mainWindow = new BrowserWindow({width: 600, height: 80, transparent: true, frame: false, resizable: false })
+  mainWindow = new BrowserWindow({
+    width: 400,
+    height: 110,
+    transparent: true,
+    frame: false,
+    resizable: false,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
   mainWindow.hide()
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'app/application.html'),
@@ -58,37 +71,11 @@ function createWindow () {
   mainWindow.on('closed', function () {
     mainWindow = null
   })
-
-  var template = [{
-  label: "Application",
-    submenu: [
-        { label: "About Application", selector: "orderFrontStandardAboutPanel:" },
-        { type: "separator" },
-        { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
-    ]}, {
-    label: "Edit",
-    submenu: [
-        { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
-        { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
-        { type: "separator" },
-        { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
-        { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
-        { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
-        { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
-    ]}
-  ];
-
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
 
 app.dock.hide()
-
 app.on('ready', createWindow)
-
-app.on('window-all-closed', function () {
-  app.quit()
-})
-
+app.on('window-all-closed', function () { app.quit() })
 app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()
@@ -97,5 +84,9 @@ app.on('activate', function () {
 
 ipcMain.on('de-activated', () => {
   mainWindow.hide()
+})
+
+ipcMain.on('activated', () => {
+  mainWindow.show()
 })
 

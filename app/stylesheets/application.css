@@ -5,13 +5,44 @@ html, body {
 
 body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 20px;
+  padding: 15px;
   margin: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
 
+#webSearch {
+  box-shadow: 0 0 10px 3px rgba(0,0,0,0.3)
+}
 #website {
-  font-weight: bold;
-  font-size: 0.9em
+  font-size: 1.08em;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0,0,0,0.3);
+  border-radius: 5px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border: 3px solid #2085d0 !important;
+  border-bottom: none !important
+}
+
+#website:active, #website:focus {
+  border: 3px solid #2085d0 !important;
+  border-bottom: none !important
+}
+
+#buttonBar .ui.button i {
+  font-size: 1.2em
+}
+
+#buttonBar .ui.button {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  /* font-size: 1.15em; */
+}
+
+#loading {
+  text-align: center;
+  font-size: 4em;
+  color: #fff;
+  padding-top: 13px;
 }
