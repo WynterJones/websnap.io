@@ -8,21 +8,7 @@
   </head>
   <body>
    
-    <div id="webSearch">
-      <div class="ui action input fluid disabled">
-        <input type="text" id="website" placeholder="Paste Website URL to Screenshot...">
-      </div>
-      <div class="ui buttons fluid" id="buttonBar">
-        <div class="ui button blue disabled" id="takeDesktop"><i class="fas fa-desktop"></i></div>
-        <div class="ui button blue disabled" id="takeMobile"><i class="fas fa-mobile-alt"></i></div>
-        <div class="ui button blue disabled" id="takeThumbnail"><i class="far fa-image"></i></div>
-        <div class="ui button blue" id="settings"><i class="far fa-folder-open"></i></div>
-      </div>
-    </div>
-
-    <div id="loading" style="display: none">
-      <i class="far fa-spinner fa-spin"></i>
-    </div>
+    <div id="app"></div>
 
 
     <script>
@@ -49,12 +35,7 @@
       // Storage
       const Store = require('electron-store')
       const store = new Store()
-
-      if (store.get('myFolderPath')) {
-        $('.button, .input').removeClass('disabled')
-      } else {
-        store.set('myFolderPath', dialog.showOpenDialog({ properties: ['openDirectory'] })[0]) 
-      }
+      const default_folder = 'default_folder_path2'
 
       // Clear storage on test
       if (process.env.MOCHA) { // --> clear storage if tests
@@ -65,23 +46,9 @@
       const component = require(path.join(__dirname, 'javascripts/components'))
 
       // Views
-      const example_view = fs.readFileSync(path.join(__dirname, 'views/example.html'), 'utf8')
+      const search_view = fs.readFileSync(path.join(__dirname, 'views/search.html'), 'utf8')
 
-      window.onfocus = function() {
-        let clipz = clipboard.readText('selection')
-        if (isUrl(clipz)) {
-          $('#website').val(clipz)
-        } else {
-          $('#website').focus()
-        }
-      }
-
-      window.onblur = function() {
-        ipcRenderer.send('de-activated')
-        $('#website').val('')
-        $('#loading').hide()
-        $('#webSearch').show()
-      }
+      $('#app').append(search_view)
 
       require('./renderer.js')
     </script>

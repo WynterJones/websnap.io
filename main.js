@@ -18,7 +18,7 @@ process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 const getWindowPosition = () => {
   const windowBounds = mainWindow.getBounds()
   const trayBounds = tray.getBounds()
-  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
+  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2) - 23)
   const y = Math.round(trayBounds.y + trayBounds.height)
   return {x: x, y: y}
 }
@@ -66,7 +66,7 @@ function createWindow () {
     tray.setHighlightMode('never')
   })
 
-  mainWindow.webContents.openDevTools({mode: 'detach'})
+  // mainWindow.webContents.openDevTools({mode: 'detach'})
 
   mainWindow.on('closed', function () {
     mainWindow = null

@@ -2,34 +2,21 @@
 
 const components = {
 
-  slugify: (string) => {
-    const a = 'àáäâãåăæçèéëêǵḧìíïîḿńǹñòóöôœṕŕßśșțùúüûǘẃẍÿź·/_,:;'
-    const b = 'aaaaaaaaceeeeghiiiimnnnoooooprssstuuuuuwxyz------'
-    const p = new RegExp(a.split('').join('|'), 'g')
-    return string.toString().toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(p, c => b.charAt(a.indexOf(c)))
-      .replace(/&/g, '-and-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '')
-      .replace('https-www', '')
-      .replace('https', '')
-      .replace('http', '')
-  },
-
   screenshot: (websiteURL, shotType) => {
-    $('#webSearch').hide()
-    $('#loading').show()
-    component.saveScreenshot(websiteURL, shotType)
+    if (isUrl(websiteURL)) {
+      $('#webSearch').hide()
+      $('#loading').show()
+      component.saveScreenshot(websiteURL, shotType)
+    } else {
+      $('#website').focus()
+    }
   },
 
   saveScreenshot: (website_url, shotType) => {
     (async () => {
       const website_name = `${shotType}-${components.slugify(website_url)}`
       const browser = await puppeteer.launch({executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'})
-      const folder_path = store.get('myFolderPath')
+      const folder_path = store.get(default_folder)
       const page = await browser.newPage()
       const override = Object.assign(page.viewport(), {width: 1366})
       await page.setViewport(override)
@@ -47,6 +34,23 @@ const components = {
       await browser.close()
       await shell.openItem(`${folder_path}/${website_name}.png`)
     })()
+  },
+
+  slugify: (string) => {
+    const a = 'àáäâãåăæçèéëêǵḧìíïîḿńǹñòóöôœṕŕßśșțùúüûǘẃẍÿź·/_,:;'
+    const b = 'aaaaaaaaceeeeghiiiimnnnoooooprssstuuuuuwxyz------'
+    const p = new RegExp(a.split('').join('|'), 'g')
+    return string.toString().toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(p, c => b.charAt(a.indexOf(c)))
+      .replace(/&/g, '-and-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '')
+      .replace('https-www', '')
+      .replace('https', '')
+      .replace('http', '')
   }
 
 }
