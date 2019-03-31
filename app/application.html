@@ -7,84 +7,37 @@
     <link rel='stylesheet' href='stylesheets/application.css'>
   </head>
   <body>
-   
     <div id="app"></div>
-
-
     <script>
-      // Environment Variables from .env file
-      require('dotenv').config()
-
-      // Electron
-      const { ipcRenderer, shell, clipboard, ipcMain, remote } = require('electron')
-      const dialog = require('electron').remote.dialog
-      const nativeImage = require('electron').nativeImage
+      const electron = require('electron')
+      const { ipcRenderer, shell, clipboard, ipcMain, remote } = electron
+      const app = electron.remote.app;
+      const dialog = electron.remote.dialog
+      const nativeImage = electron.nativeImage
       const path = require('path')
       const fs = require('fs')
       const isDev = require('electron-is-dev')
-      // const isUrl = require("is-url")
-      // const isURL = require("isurl")
-      const isURL = require('is-valid-http-url');
-
-
-      const AutoLaunch = require('auto-launch');
-
-      // Screenshots
+      const isURL = require('is-valid-http-url')
+      const AutoLaunch = require('auto-launch')
       const puppeteer = require('puppeteer')
       const devices = require('puppeteer/DeviceDescriptors')
       const iPhone = devices['iPhone 6']
-
-      // Load jQuery
-      window.$ = window.jQuery = require('jquery')
-
-      // Storage
       const Store = require('electron-store')
       const store = new Store()
-      const default_folder = 'default_folder_path2'
-
-      // Clear storage on test
-      if (process.env.MOCHA) { // --> clear storage if tests
-        store.clear()
-      }
-
-      // General Components
+      const default_folder = 'default_selected_folder_path'
       const component = require(path.join(__dirname, 'javascripts/components'))
-
-      // Views
       const search_view = fs.readFileSync(path.join(__dirname, 'views/search.html'), 'utf8')
-
-      $('#app').append(search_view)
-
-      if (process.platform == 'darwin') {
-        const { systemPreferences } = remote
-
-        const setOSTheme = () => {
-          let theme = systemPreferences.isDarkMode() ? 'dark' : 'light'
-          window.localStorage.os_theme = theme
-          if ('__setTheme' in window) {
-            window.__setTheme()
-          }
-        }
-
-        systemPreferences.subscribeNotification(
-          'AppleInterfaceThemeChangedNotification',
-          setOSTheme,
-        )
-
-        setOSTheme()
-      }
-
-      window.__setTheme = () => {
-        let userTheme = localStorage.user_theme
-        let OSTheme = localStorage.os_theme
-        let defaultTheme = 'light'
-        document.documentElement.setAttribute(
-          'data-theme',
-          userTheme || OSTheme || defaultTheme,
-        )
-      }
-      __setTheme()
-
+      const loading_view = fs.readFileSync(path.join(__dirname, 'views/loading.html'), 'utf8')
+      const settings_view = fs.readFileSync(path.join(__dirname, 'views/settings.html'), 'utf8')
+      const help_view = fs.readFileSync(path.join(__dirname, 'views/help.html'), 'utf8')
+      const startupAutoLauncher = new AutoLaunch({
+        name: 'WebShotApp',
+        path: path.dirname(remote.process.execPath),
+      })
+      // alert(path.dirname(remote.process.execPath))
+      window.$ = window.jQuery = require('jquery')
+      $('#app').append(search_view + loading_view + settings_view + help_view)
+      require('./javascripts/dark-light-mode.js')
       require('./renderer.js')
     </script>
   </body>

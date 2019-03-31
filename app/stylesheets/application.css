@@ -109,7 +109,7 @@ body {
   position: relative;
 }
 
-#settingsPanelInner {
+.settingsPanelInner {
   padding: 10px;
   height: 80px;
   border-radius: 5px !important;
@@ -117,21 +117,21 @@ body {
   background: var(--inner-bg-color);
 }
 
-#closeSettings {
+.closeIcon {
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 12px;
+  right: 15px;
   font-size: 1.2em;
   cursor: pointer;
   color: var(--text-color-solid)
 }
-#closeSettings:hover {
+
+.closeIcon:hover {
   color: var(--text-color-solid);
 }
 
 #settingsPanel label {
   color:  var(--text-color-solid) !important;
-  /* text-transform: uppercase; */
   letter-spacing: 1px;
 }
 
@@ -155,4 +155,16 @@ body {
 .ui.toggle.checkbox input:hover~.box:before, .ui.toggle.checkbox input:hover~label:before {
   background-color: rgba(0,0,0,.35);
   border: none;
+}
+
+#helpPanel {
+  color: var(--text-color-solid);
+  position: relative;
+}
+
+#helpContent {
+  padding-right: 20px;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  color:  var(--text-color-solid) !important;
 }

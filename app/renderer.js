@@ -1,3 +1,4 @@
+// Storage for Settings
 if (store.get(default_folder)) {
   $('.button, .input').removeClass('disabled')
 }
@@ -8,50 +9,34 @@ if (store.get('check_clipboard')) {
   $('#settingsOptionClipboard').removeAttr('checked')
 }
 
-window.onfocus = function() {
-  // if (store.get('check_clipboard')) {
-  //   const clipz = clipboard.readText('selection')
-  //   $('#website').val('')
-  //   if (isURL(clipz)) {
-  //     $('#website').val(clipz)
-  //     $('#website').focus()
-  //   } else {
-  //     $('#website').focus()
-  //   }
-  // }
-
-  var minecraftAutoLauncher = new AutoLaunch({
-    name: 'Brave',
-    path: '/Applications/Brave.app',
-  });
-  
-  minecraftAutoLauncher.enable();
-
-  minecraftAutoLauncher.isEnabled()
-.then(function(isEnabled){
-	if(isEnabled){
-    console.log('Brave Enabled',isEnabled)
-	    return;
-	}
-	minecraftAutoLauncher.enable();
-})
-.catch(function(err){
-  console.log('Brave err', err)
-    // handle error
-});
+if (store.get('run_on_startup')) {
+  $('#settingsOptionStartup').attr('checked', 'checked')
+} else {
+  $('#settingsOptionStartup').removeAttr('checked')
 }
 
+// Hide Window
 window.onblur = function() {
   ipcRenderer.send('de-activated')
-  $('#loading').hide()
-  $('#settingsPanel').hide()
+  $('#loading, #settingsPanel, #helpPanel').hide()
   $('#webSearch').show()
 }
 
-$('#website').keypress(function (e) {
+// Website Actions
+$(document).on('focus', '#keypress', function (e) {
   if (e.which == 13) {
     component.screenshot($(this).val(), 'desktop')
     return false
+  }
+})
+
+$(document).on('focus', '#website', function (e) {
+  if (store.get('check_clipboard')) {
+    const clipz = clipboard.readText('selection')
+    $('#website').val('')
+    if (isURL(clipz)) {
+      $('#website').val(clipz)
+    }
   }
 })
 
@@ -75,16 +60,19 @@ $(document).on('click', '#changeFolder', function (e) {
   })
 })
 
+// Settings Actions
 $(document).on('click', '#settings', function (e) {
   $('#webSearch').hide()
   $('#settingsPanel').show()
 })
 
-$(document).on('click', '#closeSettings', function (e) {
-  $('#settingsPanel').hide()
+$(document).on('click', '#closeSettings, #closeHelp', function (e) {
+  $('#settingsPanel, #helpPanel').hide()
   $('#webSearch').show()
   $('#website').focus()
 })
+
+
 
 $(document).on('change', '#settingsOptionClipboard', function (e) {
   let checkData
@@ -94,4 +82,16 @@ $(document).on('change', '#settingsOptionClipboard', function (e) {
     checkData = false
   }
   store.set('check_clipboard', checkData)
+})
+
+$(document).on('change', '#settingsOptionStartup', function (e) {
+  let checkData
+  if (this.checked) {
+    checkData = true
+    startupAutoLauncher.enable();
+  } else {
+    checkData = false
+    startupAutoLauncher.disable();
+  }
+  store.set('run_on_startup', checkData)
 })

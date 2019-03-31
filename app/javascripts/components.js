@@ -3,12 +3,13 @@
 const components = {
 
   screenshot: (websiteURL, shotType) => {
-    if (isUrl(websiteURL)) {
+    if (websiteURL && isURL(websiteURL)) {
       $('#webSearch').hide()
       $('#loading').show()
       component.saveScreenshot(websiteURL, shotType)
     } else {
-      $('#website').focus()
+      $('#settingsPanel, #webSearch').hide()
+      $('#helpPanel').show()
     }
   },
 

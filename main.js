@@ -9,8 +9,6 @@ const isDev = require('electron-is-dev')
 const autoUpdater = require('electron-updater').autoUpdater
 let mainWindow, tray
 
-require('dotenv').config()
-require('electron-context-menu')({})
 
 // disaply security warnings
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
@@ -24,8 +22,6 @@ const getWindowPosition = () => {
 }
 
 function createWindow () {
-  // let trayIcon = nativeImage.createFromPath(path.join(__dirname, './xxxTemplate.png'))
-  // trayIcon = trayIcon.resize({ width: 16, height: 16 })
   tray = new Tray(path.join(__dirname, './xxxTemplate.png'))
   mainWindow = new BrowserWindow({
     width: 400,
@@ -33,11 +29,12 @@ function createWindow () {
     transparent: true,
     frame: false,
     resizable: false,
+    alwaysOnTop: true,
     webPreferences: {
       nodeIntegration: true
     }
   })
-  mainWindow.hide()
+  
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'app/application.html'),
     protocol: 'file:',
@@ -47,29 +44,8 @@ function createWindow () {
   const position = getWindowPosition()
   mainWindow.setPosition(position.x, position.y, false)
 
-  // if (process.platform == 'darwin') {
-  //   const systemPreferences = remote
-
-  //   const setOSTheme = () => {
-  //     let theme = systemPreferences.isDarkMode() ? 'dark' : 'light'
-  //     window.localStorage.os_theme = theme
-  //     if ('__setTheme' in window) {
-  //       window.__setTheme()
-  //     }
-  //   }
-
-  //   systemPreferences.subscribeNotification(
-  //     'AppleInterfaceThemeChangedNotification',
-  //     setOSTheme,
-  //   )
-
-  //   setOSTheme()
-  // }
-
-  // window.__setTheme = () => {
-  //   console.log('hey', userTheme || OSTheme || defaultTheme)
-  // }
-  // __setTheme()
+  mainWindow.show()
+  // mainWindow.webContents.openDevTools({mode: 'detach'})
 
   tray.on('click', () => {
     if (mainWindow.isVisible()) {
@@ -88,8 +64,6 @@ function createWindow () {
   mainWindow.on('hide', () => {
     tray.setHighlightMode('never')
   })
-
-  mainWindow.webContents.openDevTools({mode: 'detach'})
 
   mainWindow.on('closed', function () {
     mainWindow = null
