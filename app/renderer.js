@@ -2,14 +2,43 @@ if (store.get(default_folder)) {
   $('.button, .input').removeClass('disabled')
 }
 
+if (store.get('check_clipboard')) {
+  $('#settingsOptionClipboard').attr('checked', 'checked')
+} else {
+  $('#settingsOptionClipboard').removeAttr('checked')
+}
+
 window.onfocus = function() {
-  const clipz = clipboard.readText('selection')
-  $('#website').val('')
-  if (isUrl(clipz)) {
-    $('#website').val(clipz)
-  } else {
-    $('#website').focus()
-  }
+  // if (store.get('check_clipboard')) {
+  //   const clipz = clipboard.readText('selection')
+  //   $('#website').val('')
+  //   if (isURL(clipz)) {
+  //     $('#website').val(clipz)
+  //     $('#website').focus()
+  //   } else {
+  //     $('#website').focus()
+  //   }
+  // }
+
+  var minecraftAutoLauncher = new AutoLaunch({
+    name: 'Brave',
+    path: '/Applications/Brave.app',
+  });
+  
+  minecraftAutoLauncher.enable();
+
+  minecraftAutoLauncher.isEnabled()
+.then(function(isEnabled){
+	if(isEnabled){
+    console.log('Brave Enabled',isEnabled)
+	    return;
+	}
+	minecraftAutoLauncher.enable();
+})
+.catch(function(err){
+  console.log('Brave err', err)
+    // handle error
+});
 }
 
 window.onblur = function() {
@@ -55,4 +84,14 @@ $(document).on('click', '#closeSettings', function (e) {
   $('#settingsPanel').hide()
   $('#webSearch').show()
   $('#website').focus()
+})
+
+$(document).on('change', '#settingsOptionClipboard', function (e) {
+  let checkData
+  if (this.checked) {
+    checkData = true
+  } else {
+    checkData = false
+  }
+  store.set('check_clipboard', checkData)
 })

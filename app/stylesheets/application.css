@@ -1,5 +1,21 @@
 :root {
-  --main-color: #5065cd;
+  --main-color: #4b65e6;
+}
+
+[data-theme^="light"]{
+  --background-color: rgba(233, 233, 239, 1.000);
+  --box-shadow: none;
+  --inner-bg-color: rgba(255,255,255,0.7);
+  --text-color-transparent: #999;
+  --text-color-solid: #333;
+}
+
+[data-theme^="dark"] {
+  --background-color: rgba(0, 0, 0, 0.7);
+  --box-shadow: rgba(0,0,0,0.3);
+  --inner-bg-color: rgba(0,0,0,0.7);
+  --text-color-transparent: #fff;
+  --text-color-solid: #fff;
 }
 
 html, body {
@@ -10,9 +26,9 @@ body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 15px;
   margin: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--background-color);
   overflow: hidden;
-  transition: all 2s;
+  color: var(--text-color-solid);
 }
 
 [data-inverted][data-position~=top][data-tooltip]:before,
@@ -25,7 +41,6 @@ body {
 }
 
 #webSearch {
-  box-shadow: 0 0 10px 3px rgba(0,0,0,0.3);
   position: relative;
 }
 
@@ -49,8 +64,8 @@ body {
 
 #website {
   font-size: 1.08em;
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(0,0,0,0.3);
+  color: var(--text-color-solid);
+  background: var(--inner-bg-color);
   border-radius: 5px !important;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
@@ -85,12 +100,12 @@ body {
 #loading {
   text-align: center;
   font-size: 4em;
-  color: #fff;
+  color: var(--text-color-solid);
   padding-top: 13px;
 }
 
 #settingsPanel {
-  color: #fff;
+  color: var(--text-color-solid);
   position: relative;
 }
 
@@ -99,7 +114,7 @@ body {
   height: 80px;
   border-radius: 5px !important;
   border: 5px solid var(--main-color);
-  background: rgba(0,0,0,0.3);
+  background: var(--inner-bg-color);
 }
 
 #closeSettings {
@@ -108,20 +123,20 @@ body {
   right: 20px;
   font-size: 1.2em;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.6)
+  color: var(--text-color-solid)
 }
 #closeSettings:hover {
-  color: #fff;
+  color: var(--text-color-solid);
 }
 
 #settingsPanel label {
-  color: rgba(255, 255, 255, 0.6) !important;
+  color:  var(--text-color-solid) !important;
   /* text-transform: uppercase; */
   letter-spacing: 1px;
 }
 
 #settingsPanel .ui.toggle.checkbox input:checked~label {
-  color: #fff !important;
+  color:  var(--text-color-solid) !important;
 }
 
 .ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before {
@@ -133,6 +148,11 @@ body {
 }
 
 .ui.toggle.checkbox input:focus~.box:before, .ui.toggle.checkbox input:focus~label:before {
+  background-color: rgba(0,0,0,.35);
+  border: none;
+}
+
+.ui.toggle.checkbox input:hover~.box:before, .ui.toggle.checkbox input:hover~label:before {
   background-color: rgba(0,0,0,.35);
   border: none;
 }
