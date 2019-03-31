@@ -1,6 +1,6 @@
 {
-  "name": "webshot",
-  "productName": "MVP App 0.0.1",
+  "name": "screenicorn",
+  "productName": "Screenicorn 0.0.1",
   "version": "0.0.1",
   "description": "A minimal application with Powah!",
   "author": {
@@ -15,7 +15,8 @@
     "start": "electron .",
     "test": "export MOCHA=true; DEBUG=true mocha tests --no-timeouts --bail; unset MOCHA",
     "build": "electron-builder",
-    "release": "build",
+    "build2": "rm -rf build && pkg . --out-path build",
+    "postbuild": "cp -R ./node_modules/puppeteer/.local-chromium dist/mac/chromium",
     "readme": "node ./node_modules/.bin/node-readme"
   },
   "build": {
@@ -50,6 +51,6 @@
     "electron-updater": "4.0.8",
     "is-valid-http-url": "^1.0.1",
     "jquery": "^3.3.1",
-    "puppeteer": "^1.13.0"
+    "puppeteer-core": "^1.14.0"
   }
 }

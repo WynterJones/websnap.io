@@ -19,8 +19,8 @@
       const isDev = require('electron-is-dev')
       const isURL = require('is-valid-http-url')
       const AutoLaunch = require('auto-launch')
-      const puppeteer = require('puppeteer')
-      const devices = require('puppeteer/DeviceDescriptors')
+      const puppeteer = require('puppeteer-core')
+      const devices = require('puppeteer-core/DeviceDescriptors')
       const iPhone = devices['iPhone 6']
       const Store = require('electron-store')
       const store = new Store()
@@ -30,11 +30,12 @@
       const loading_view = fs.readFileSync(path.join(__dirname, 'views/loading.html'), 'utf8')
       const settings_view = fs.readFileSync(path.join(__dirname, 'views/settings.html'), 'utf8')
       const help_view = fs.readFileSync(path.join(__dirname, 'views/help.html'), 'utf8')
+      const appPath = path.dirname(remote.process.execPath)
       const startupAutoLauncher = new AutoLaunch({
         name: 'WebShotApp',
-        path: path.dirname(remote.process.execPath),
+        path: appPath.replace('/Contents/MacOS', ''),
       })
-      alert(path.dirname(remote.process.execPath))
+      console.log(appPath.replace('/Contents/MacOS', ''))
       window.$ = window.jQuery = require('jquery')
       $('#app').append(search_view + loading_view + settings_view + help_view)
       require('./javascripts/dark-light-mode.js')
