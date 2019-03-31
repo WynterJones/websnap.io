@@ -22,7 +22,7 @@ const getWindowPosition = () => {
 }
 
 function createWindow () {
-  tray = new Tray(path.join(__dirname, './xxxTemplate.png'))
+  tray = new Tray(path.join(__dirname, './trayIconTemplate.png'))
   mainWindow = new BrowserWindow({
     width: 400,
     height: 110,
@@ -45,7 +45,7 @@ function createWindow () {
   const position = getWindowPosition()
   mainWindow.setPosition(position.x, position.y, false)
 
-  mainWindow.webContents.openDevTools({mode: 'detach'})
+  // mainWindow.webContents.openDevTools({mode: 'detach'})
 
   tray.on('click', () => {
     if (mainWindow.isVisible()) {

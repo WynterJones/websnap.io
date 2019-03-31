@@ -1,4 +1,4 @@
-// Storage for Settings
+// Init - Storage for Settings
 if (store.get(default_folder)) {
   $('#introText').hide()
   $('#folderIcon').attr('class', 'far fa-folder-open')

@@ -24,7 +24,7 @@
       const iPhone = devices['iPhone 6']
       const Store = require('electron-store')
       const store = new Store()
-      const default_folder = 'default_selected_folder_path2'
+      const default_folder = 'default_selected_folders'
       const component = require(path.join(__dirname, 'javascripts/components'))
       const search_view = fs.readFileSync(path.join(__dirname, 'views/search.html'), 'utf8')
       const loading_view = fs.readFileSync(path.join(__dirname, 'views/loading.html'), 'utf8')
@@ -34,10 +34,11 @@
         name: 'WebShotApp',
         path: path.dirname(remote.process.execPath),
       })
-      // alert(path.dirname(remote.process.execPath))
+      alert(path.dirname(remote.process.execPath))
       window.$ = window.jQuery = require('jquery')
       $('#app').append(search_view + loading_view + settings_view + help_view)
       require('./javascripts/dark-light-mode.js')
+      require('./javascripts/init.js')
       require('./renderer.js')
     </script>
   </body>
