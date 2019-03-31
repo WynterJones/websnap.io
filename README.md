@@ -1,4 +1,4 @@
-<img src="https://github.com/MonetizeDesignTeam/webshots/blob/master/app/images/logo.png?raw=true" style="width: 150px;" />
+<img src="https://github.com/monetizedesign/webshots/blob/master/app/images/logo.png?raw=true" style="width: 150px;" />
 
 # Webicorn.io ⚡
 #### Version: 0.0.1
