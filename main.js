@@ -28,6 +28,7 @@ function createWindow () {
     height: 110,
     transparent: true,
     frame: false,
+    show: true,
     resizable: false,
     alwaysOnTop: true,
     webPreferences: {
@@ -44,8 +45,7 @@ function createWindow () {
   const position = getWindowPosition()
   mainWindow.setPosition(position.x, position.y, false)
 
-  mainWindow.show()
-  // mainWindow.webContents.openDevTools({mode: 'detach'})
+  mainWindow.webContents.openDevTools({mode: 'detach'})
 
   tray.on('click', () => {
     if (mainWindow.isVisible()) {

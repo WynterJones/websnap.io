@@ -1,6 +1,10 @@
 // Storage for Settings
 if (store.get(default_folder)) {
-  $('.button, .input').removeClass('disabled')
+  $('#introText').hide()
+  $('#folderIcon').attr('class', 'far fa-folder-open')
+  $('.button, .input').removeClass('disable')
+} else {
+  $('#website').removeAttr('placeholder')
 }
 
 if (store.get('check_clipboard')) {
@@ -56,7 +60,10 @@ $(document).on('click', '#changeFolder', function (e) {
   dialog.showOpenDialog({ properties: ['openDirectory'] }, function (data) {
     store.set(default_folder, data[0])
     ipcRenderer.send('activated')
-    $('.button, .input').removeClass('disabled')
+    $('#introText').hide()
+    $('#folderIcon').attr('class', 'far fa-folder-open')
+    $('#website').attr('placeholder', 'Paste Website URL to Screenshot...')
+    $('.button, .input').removeClass('disable')
   })
 })
 
@@ -71,8 +78,6 @@ $(document).on('click', '#closeSettings, #closeHelp', function (e) {
   $('#webSearch').show()
   $('#website').focus()
 })
-
-
 
 $(document).on('change', '#settingsOptionClipboard', function (e) {
   let checkData

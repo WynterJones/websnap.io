@@ -1,25 +1,26 @@
 <div id="webSearch" class="unicornArrow">
-  <div class="ui action input fluid disabled">
+  <span id="introText">Select a Screenshot Folder <i class="fas fa-arrow-circle-down"></i></span>
+  <div class="ui action input fluid disable">
     <input type="text" id="website" placeholder="Paste Website URL to Screenshot...">
   </div>
   <div class="ui buttons fluid" id="buttonBar">
-    <div id="takeDesktop" class="ui button disabled" data-tooltip="Capture Desktop" data-position="top left" data-inverted="">
+    <div id="takeDesktop" class="ui button disable" data-tooltip="Capture Desktop" data-position="top left" data-inverted="">
       <i class="fas fa-desktop"></i>
     </div>
 
-    <div id="takeMobile" class="ui button disabled" data-tooltip="Capture Mobile" data-inverted="">
+    <div id="takeMobile" class="ui button disable" data-tooltip="Capture Mobile" data-inverted="">
       <i class="fas fa-mobile-alt"></i>
     </div>
 
-    <div id="takeThumbnail" class="ui button disabled" data-tooltip="Capture Thumbnail" data-inverted="">
+    <div id="takeThumbnail" class="ui button disable" data-tooltip="Capture Thumbnail" data-inverted="">
       <i class="far fa-image"></i>
     </div>
     
-    <div id="changeFolder" class="ui button" data-tooltip="Change Folder" data-inverted="">
-      <i class="far fa-folder-open"></i>
+    <div id="changeFolder" class="ui button" data-tooltip="Select Folder" data-inverted="">
+      <i class="far fa-folder" id="folderIcon"></i>
     </div>
 
-    <div id="settings" class="ui button" data-tooltip="Settings" data-inverted="" data-position="top right">
+    <div id="settings" class="ui button disable" data-tooltip="Settings" data-inverted="" data-position="top right">
       <i class="far fa-cog"></i>
     </div>
   </div>
