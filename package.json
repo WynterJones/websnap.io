@@ -1,12 +1,12 @@
 {
-  "name": "screenicorn",
-  "productName": "Screenicorn 0.0.1",
+  "name": "webicon",
+  "productName": "Webicon - Simple Website Screenshots",
   "version": "0.0.1",
-  "description": "A minimal application with Powah!",
+  "description": "Take screenshots of any website with Desktop, Mobile or Thumbnails all in beautiful high rise and save instantly to any folder on your desktop.",
   "author": {
-    "name": "Name",
-    "email": "email@website.com",
-    "url": "http://www.website.com/"
+    "name": "Wynter Jones",
+    "email": "wynter@monetizedesign.com",
+    "url": "https://www.webicorn.io/"
   },
   "license": "CC0-1.0",
   "repository": "https://github.com/MonetizeDesignTeam/webshot",
@@ -14,10 +14,7 @@
   "scripts": {
     "start": "electron .",
     "test": "export MOCHA=true; DEBUG=true mocha tests --no-timeouts --bail; unset MOCHA",
-    "build": "electron-builder",
-    "build2": "rm -rf build && pkg . --out-path build",
-    "postbuild": "cp -R ./node_modules/puppeteer/.local-chromium dist/mac/chromium",
-    "readme": "node ./node_modules/.bin/node-readme"
+    "build": "electron-builder"
   },
   "build": {
     "asar": true,
