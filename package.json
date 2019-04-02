@@ -1,12 +1,12 @@
 {
-  "name": "webicon",
-  "productName": "Webicon - Simple Website Screenshots",
+  "name": "websnap",
+  "productName": "WebSnap",
   "version": "0.0.1",
   "description": "Take screenshots of any website with Desktop, Mobile or Thumbnails all in beautiful high rise and save instantly to any folder on your desktop.",
   "author": {
     "name": "Wynter Jones",
     "email": "wynter@monetizedesign.com",
-    "url": "https://www.webicorn.io/"
+    "url": "https://www.WebSnap.io/"
   },
   "license": "CC0-1.0",
   "repository": "https://github.com/MonetizeDesignTeam/webshot",
@@ -22,24 +22,12 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "devtron": "^1.4.0",
     "electron": "4.0.6",
     "electron-builder": "^20.39.0",
-    "electron-publisher-s3": "^20.17.2",
-    "electron-rebuild": "^1.8.4",
-    "eslint": "^4.19.1",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
     "mocha": "^5.2.0",
     "mocha-junit-reporter": "^1.18.0",
     "mocha-multi-reporters": "^1.1.7",
-    "mocha-reporter": "^0.1.1",
-    "node-readme": "^0.1.9",
-    "spectron": "^3.8.0",
-    "standard": "^11.0.1"
+    "mocha-reporter": "^0.1.1"
   },
   "dependencies": {
     "auto-launch": "^5.0.5",

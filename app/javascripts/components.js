@@ -16,12 +16,6 @@ const components = {
   saveScreenshot: (website_url, shotType) => {
     (async () => {
       const website_name = `${shotType}-${components.slugify(website_url)}`
-      let chromePath
-      if (process.platform === "win32") {
-          chromePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
-      } else {
-          chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-      }
       const browser = await puppeteer.launch({executablePath: chromePath})
       const folder_path = store.get(default_folder)
       const page = await browser.newPage()

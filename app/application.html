@@ -35,6 +35,7 @@
         name: 'WebShotApp',
         path: appPath.replace('/Contents/MacOS', ''),
       })
+      const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
       console.log(appPath.replace('/Contents/MacOS', ''))
       window.$ = window.jQuery = require('jquery')
       $('#app').append(search_view + loading_view + settings_view + help_view)

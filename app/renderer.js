@@ -19,6 +19,22 @@ if (store.get('run_on_startup')) {
   $('#settingsOptionStartup').removeAttr('checked')
 }
 
+// Keycodes for SelectAll and Paste
+document.onkeydown = function(event){
+	let toReturn = true
+	if(event.ctrlKey || event.metaKey){ 
+		if (event.which == 86) {
+			document.activeElement.value += clipboard.readText()
+			document.activeElement.dispatchEvent(new Event('input'))
+			toReturn = false
+		} else if (event.which == 65) {
+      $('#website').select()
+    }
+	}
+
+	return toReturn
+}
+
 // Hide Window
 window.onblur = function() {
   ipcRenderer.send('de-activated')
@@ -27,6 +43,11 @@ window.onblur = function() {
 }
 
 // Website Actions
+$(document).on('click', '#closeApp', function (e) {
+  ipcRenderer.send('close-me')
+})
+
+
 $(document).on('focus', '#keypress', function (e) {
   if (e.which == 13) {
     component.screenshot($(this).val(), 'desktop')
@@ -99,4 +120,10 @@ $(document).on('change', '#settingsOptionStartup', function (e) {
     startupAutoLauncher.disable();
   }
   store.set('run_on_startup', checkData)
+})
+
+ipcRenderer.on('info', (evt, arg) => {
+  const clipz = clipboard.readText('selection')
+  $('#website').val(clipz)
+  $('#takeDesktop').trigger('click')
 })

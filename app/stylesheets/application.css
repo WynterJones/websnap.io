@@ -147,7 +147,14 @@ body {
   right: 15px;
   font-size: 1.2em;
   cursor: pointer;
+  z-index: 999;
   color: var(--text-color-solid)
+}
+
+#closeApp {
+  top: 38px;
+  font-size: 1.15em;
+  cursor: pointer;
 }
 
 .closeIcon:hover {
