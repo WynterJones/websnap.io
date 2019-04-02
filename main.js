@@ -5,6 +5,7 @@ const {app, BrowserWindow, Tray, ipcMain, globalShortcut, clipboard} = electron
 const isURL = require('is-valid-http-url')
 const path = require('path')
 const url = require('url')
+const isDev = require('electron-is-dev')
 const { autoUpdater } = require("electron-updater")
 let mainWindow, tray
 
@@ -53,8 +54,6 @@ function createWindow () {
     slashes: true
   }))
 
-  mainWindow.webContents.openDevTools({mode: 'detach'})
-
   const position = getWindowPosition()
   mainWindow.setPosition(position.x, position.y, false)
 
@@ -71,6 +70,10 @@ function createWindow () {
   mainWindow.on('show', () => { tray.setHighlightMode('always') })
   mainWindow.on('hide', () => { tray.setHighlightMode('never') })
   mainWindow.on('closed', function () { mainWindow = null })
+
+  if (isDev) {
+    mainWindow.webContents.openDevTools({mode: 'detach'})
+  }
 }
 
 function createKeyboardShortcut() {
@@ -78,7 +81,7 @@ function createKeyboardShortcut() {
     const clips = clipboard.readText('selection')
     if (isURL(clips)) {
       mainWindow.show()
-      mainWindow.webContents.send('info' , {msg:'hello from main process'})
+      mainWindow.webContents.send('detectKeyboardShortcut')
     } else {
       return false
     }

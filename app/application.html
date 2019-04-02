@@ -23,7 +23,7 @@
       const Store = require('electron-store')
       const store = new Store()
       const component = require(path.join(__dirname, 'javascripts/components'))
-      const actions = require(path.join(__dirname, 'javascripts/events'))
+      const events = require(path.join(__dirname, 'javascripts/events'))
       const search_view = fs.readFileSync(path.join(__dirname, 'views/search.html'), 'utf8')
       const loading_view = fs.readFileSync(path.join(__dirname, 'views/loading.html'), 'utf8')
       const settings_view = fs.readFileSync(path.join(__dirname, 'views/settings.html'), 'utf8')
