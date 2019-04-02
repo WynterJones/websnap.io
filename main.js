@@ -8,6 +8,22 @@ const url = require('url')
 const { autoUpdater } = require("electron-updater")
 let mainWindow, tray
 
+app.dock.hide()
+app.on('window-all-closed', function () { app.quit() })
+app.on('activate', function () { if (mainWindow === null) { createWindow() } })
+app.on('ready', function () {
+  createWindow()
+  createKeyboardShortcut()
+  autoUpdater.checkForUpdatesAndNotify()
+})
+app.on('will-quit', () => {
+  globalShortcut.unregister('Shift+Command+V')
+  globalShortcut.unregisterAll()
+})
+
+ipcMain.on('de-activated', () => { mainWindow.hide() })
+ipcMain.on('activated', () => { mainWindow.show() })
+
 const getWindowPosition = () => {
   const windowBounds = mainWindow.getBounds()
   const trayBounds = tray.getBounds()
@@ -37,10 +53,10 @@ function createWindow () {
     slashes: true
   }))
 
+  mainWindow.webContents.openDevTools({mode: 'detach'})
+
   const position = getWindowPosition()
   mainWindow.setPosition(position.x, position.y, false)
-
-  mainWindow.webContents.openDevTools({mode: 'detach'})
 
   tray.on('click', () => {
     if (mainWindow.isVisible()) {
@@ -52,17 +68,9 @@ function createWindow () {
     }
   })
 
-  mainWindow.on('show', () => {
-    tray.setHighlightMode('always')
-  })
-
-  mainWindow.on('hide', () => {
-    tray.setHighlightMode('never')
-  })
-
-  mainWindow.on('closed', function () {
-    mainWindow = null
-  })
+  mainWindow.on('show', () => { tray.setHighlightMode('always') })
+  mainWindow.on('hide', () => { tray.setHighlightMode('never') })
+  mainWindow.on('closed', function () { mainWindow = null })
 }
 
 function createKeyboardShortcut() {
@@ -70,43 +78,10 @@ function createKeyboardShortcut() {
     const clips = clipboard.readText('selection')
     if (isURL(clips)) {
       mainWindow.show()
-      mainWindow.webContents.send('info' , {msg:'hello from main process'});
+      mainWindow.webContents.send('info' , {msg:'hello from main process'})
     } else {
-      return false;
+      return false
     }
   })
-
-  if (!ret) {
-    console.log('registration failed')
-  }
+  if (!ret) { console.log('registration failed') }
 }
-
-app.dock.hide()
-app.on('ready', function () {
-  createWindow()
-  createKeyboardShortcut()
-  autoUpdater.checkForUpdatesAndNotify()
-})
-app.on('window-all-closed', function () { app.quit() })
-app.on('activate', function () {
-  if (mainWindow === null) {
-    createWindow()
-  }
-})
-
-app.on('will-quit', () => {
-  globalShortcut.unregister('Shift+Command+V')
-  globalShortcut.unregisterAll()
-})
-
-ipcMain.on('de-activated', () => {
-  mainWindow.hide()
-})
-
-ipcMain.on('activated', () => {
-  mainWindow.show()
-})
-
-ipcMain.on('close-me', (evt, arg) => {
-  app.quit()
-})
