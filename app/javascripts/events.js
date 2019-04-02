@@ -1,6 +1,6 @@
 'use strict'
 
-const event = {
+const events = {
 
   windowBlur: () => {
     ipcRenderer.send('de-activated')
@@ -73,4 +73,4 @@ const event = {
 
 }
 
-module.exports = event
+module.exports = events
