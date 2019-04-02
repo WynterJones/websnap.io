@@ -33,7 +33,7 @@ const getWindowPosition = () => {
 }
 
 function createWindow () {
-  tray = new Tray(path.join(__dirname, './app/images/tray-iconTemplate.png'))
+  tray = new Tray(path.join(__dirname, './build/tray-iconTemplate.png'))
   mainWindow = new BrowserWindow({
     width: 400,
     height: 110,

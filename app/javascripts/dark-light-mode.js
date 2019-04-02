@@ -1,3 +1,5 @@
+'use strict'
+
 const { systemPreferences } = remote
 const setOSTheme = () => {
   let theme = systemPreferences.isDarkMode() ? 'dark' : 'light'

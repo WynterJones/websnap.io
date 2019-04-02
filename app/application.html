@@ -22,7 +22,6 @@
       const iPhone = devices['iPhone 6']
       const Store = require('electron-store')
       const store = new Store()
-      const default_folder = 'default_selected_folders'
       const component = require(path.join(__dirname, 'javascripts/components'))
       const actions = require(path.join(__dirname, 'javascripts/events'))
       const search_view = fs.readFileSync(path.join(__dirname, 'views/search.html'), 'utf8')
@@ -35,10 +34,11 @@
         path: appPath.replace('/Contents/MacOS', ''),
       })
       const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+      const default_folder = 'default_selected_folders'
       window.$ = window.jQuery = require('jquery')
       $('#app').append(search_view + loading_view + settings_view + help_view)
       require('./javascripts/dark-light-mode.js')
-      require('./javascripts/init.js')
+      require('./javascripts/storage-check.js')
       require('./renderer.js')
     </script>
   </body>

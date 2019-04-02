@@ -1,3 +1,11 @@
+'use strict'
+
+window.onblur = function() {
+  ipcRenderer.send('de-activated')
+  $('#loading, #settingsPanel, #helpPanel').hide()
+  $('#webSearch').show()
+}
+
 document.onkeydown = function(event){
 	let toReturn = true
 	if(event.ctrlKey || event.metaKey){ 
