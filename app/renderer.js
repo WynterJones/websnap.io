@@ -1,25 +1,3 @@
-// Init - Storage for Settings
-if (store.get(default_folder)) {
-  $('#introText').hide()
-  $('#folderIcon').attr('class', 'far fa-folder-open')
-  $('.button, .input').removeClass('disable')
-} else {
-  $('#website').removeAttr('placeholder')
-}
-
-if (store.get('check_clipboard')) {
-  $('#settingsOptionClipboard').attr('checked', 'checked')
-} else {
-  $('#settingsOptionClipboard').removeAttr('checked')
-}
-
-if (store.get('run_on_startup')) {
-  $('#settingsOptionStartup').attr('checked', 'checked')
-} else {
-  $('#settingsOptionStartup').removeAttr('checked')
-}
-
-// Keycodes for SelectAll and Paste
 document.onkeydown = function(event){
 	let toReturn = true
 	if(event.ctrlKey || event.metaKey){ 
@@ -33,28 +11,20 @@ document.onkeydown = function(event){
 	}
 	return toReturn
 }
-
-// Hide Window
 window.onblur = function() {
   ipcRenderer.send('de-activated')
   $('#loading, #settingsPanel, #helpPanel').hide()
   $('#webSearch').show()
 }
 
-// Website Actions
-$(document).on('click', '#closeApp', function (e) {
-  ipcRenderer.send('close-me')
+ipcRenderer.on('info', (evt, arg) => {
+  const clipz = clipboard.readText('selection')
+  $('#website').val(clipz)
+  $('#takeDesktop').trigger('click')
 })
 
-
-$(document).on('focus', '#keypress', function (e) {
-  if (e.which == 13) {
-    component.screenshot($(this).val(), 'desktop')
-    return false
-  }
-})
-
-$(document).on('focus', '#website', function (e) {
+$(document).on('click', '#closeApp', function () { app.quit() })
+$(document).on('focus', '#website', function () {
   if (store.get('check_clipboard')) {
     const clipz = clipboard.readText('selection')
     $('#website').val('')
@@ -63,20 +33,10 @@ $(document).on('focus', '#website', function (e) {
     }
   }
 })
-
-$(document).on('click', '#takeDesktop', function (e) {
-  component.screenshot($('#website').val(), 'desktop')
-})
-
-$(document).on('click', '#takeMobile', function (e) {
-  component.screenshot($('#website').val(), 'mobile')
-})
-
-$(document).on('click', '#takeThumbnail', function (e) {
-  component.screenshot($('#website').val(), 'thumbnail')
-})
-
-$(document).on('click', '#changeFolder', function (e) {
+$(document).on('click', '#takeDesktop', function () { component.screenshot($('#website').val(), 'desktop') })
+$(document).on('click', '#takeMobile', function () { component.screenshot($('#website').val(), 'mobile') })
+$(document).on('click', '#takeThumbnail', function () { component.screenshot($('#website').val(), 'thumbnail') })
+$(document).on('click', '#changeFolder', function () {
   dialog.showOpenDialog({ properties: ['openDirectory'] }, function (data) {
     store.set(default_folder, data[0])
     ipcRenderer.send('activated')
@@ -86,20 +46,16 @@ $(document).on('click', '#changeFolder', function (e) {
     $('.button, .input').removeClass('disable')
   })
 })
-
-// Settings Actions
-$(document).on('click', '#settings', function (e) {
+$(document).on('click', '#settings', function () {
   $('#webSearch').hide()
   $('#settingsPanel').show()
 })
-
-$(document).on('click', '#closeSettings, #closeHelp', function (e) {
+$(document).on('click', '#closeSettings, #closeHelp', function () {
   $('#settingsPanel, #helpPanel').hide()
   $('#webSearch').show()
   $('#website').focus()
 })
-
-$(document).on('change', '#settingsOptionClipboard', function (e) {
+$(document).on('change', '#settingsOptionClipboard', function () {
   let checkData
   if (this.checked) {
     checkData = true
@@ -108,8 +64,7 @@ $(document).on('change', '#settingsOptionClipboard', function (e) {
   }
   store.set('check_clipboard', checkData)
 })
-
-$(document).on('change', '#settingsOptionStartup', function (e) {
+$(document).on('change', '#settingsOptionStartup', function () {
   let checkData
   if (this.checked) {
     checkData = true
@@ -119,10 +74,4 @@ $(document).on('change', '#settingsOptionStartup', function (e) {
     startupAutoLauncher.disable();
   }
   store.set('run_on_startup', checkData)
-})
-
-ipcRenderer.on('info', (evt, arg) => {
-  const clipz = clipboard.readText('selection')
-  $('#website').val(clipz)
-  $('#takeDesktop').trigger('click')
 })

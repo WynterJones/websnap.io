@@ -14,11 +14,21 @@
   "scripts": {
     "start": "electron .",
     "test": "export MOCHA=true; DEBUG=true mocha tests --no-timeouts --bail; unset MOCHA",
-    "build": "electron-builder"
+    "build": "electron-builder",
+    "release": "build"
   },
   "build": {
-    "asar": true,
-    "asarUnpack": "node_modules/puppeteer/.local-chromium/**/*"
+    "copyright": "Copyright © 2018 ${author}",
+    "dmg": {
+      "iconSize": "90",
+      "iconTextSize": "13",
+      "title": "Install WebSnap"
+    },
+    "publish": {
+      "provider": "github",
+      "repo": "websnap.io",
+      "owner": "monetizedesign"
+    }
   },
   "devDependencies": {
     "chai": "^4.2.0",

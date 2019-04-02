@@ -10,13 +10,11 @@
     <div id="app"></div>
     <script>
       const electron = require('electron')
-      const { ipcRenderer, shell, clipboard, ipcMain, remote } = electron
-      const app = electron.remote.app;
+      const { ipcRenderer, shell, clipboard, ipcMain, remote, autoUpdater } = electron
       const dialog = electron.remote.dialog
-      const nativeImage = electron.nativeImage
-      const path = require('path')
+      const app = electron.remote.app
       const fs = require('fs')
-      const isDev = require('electron-is-dev')
+      const path = require('path')
       const isURL = require('is-valid-http-url')
       const AutoLaunch = require('auto-launch')
       const puppeteer = require('puppeteer-core')
@@ -26,6 +24,7 @@
       const store = new Store()
       const default_folder = 'default_selected_folders'
       const component = require(path.join(__dirname, 'javascripts/components'))
+      const actions = require(path.join(__dirname, 'javascripts/events'))
       const search_view = fs.readFileSync(path.join(__dirname, 'views/search.html'), 'utf8')
       const loading_view = fs.readFileSync(path.join(__dirname, 'views/loading.html'), 'utf8')
       const settings_view = fs.readFileSync(path.join(__dirname, 'views/settings.html'), 'utf8')

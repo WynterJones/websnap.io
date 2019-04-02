@@ -5,7 +5,7 @@ const {app, BrowserWindow, Tray, ipcMain, globalShortcut, clipboard} = electron
 const isURL = require('is-valid-http-url')
 const path = require('path')
 const url = require('url')
-const autoUpdater = require('electron-updater').autoUpdater
+const { autoUpdater } = require("electron-updater")
 let mainWindow, tray
 
 const getWindowPosition = () => {
@@ -40,7 +40,7 @@ function createWindow () {
   const position = getWindowPosition()
   mainWindow.setPosition(position.x, position.y, false)
 
-  // mainWindow.webContents.openDevTools({mode: 'detach'})
+  mainWindow.webContents.openDevTools({mode: 'detach'})
 
   tray.on('click', () => {
     if (mainWindow.isVisible()) {
@@ -85,6 +85,7 @@ app.dock.hide()
 app.on('ready', function () {
   createWindow()
   createKeyboardShortcut()
+  autoUpdater.checkForUpdatesAndNotify()
 })
 app.on('window-all-closed', function () { app.quit() })
 app.on('activate', function () {
