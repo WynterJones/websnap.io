@@ -77,7 +77,6 @@ function createKeyboardShortcut() {
   const ret = globalShortcut.register('Shift+Command+V', () => {
     const clips = clipboard.readText('selection')
     if (isURL(clips)) {
-      mainWindow.show()
       mainWindow.webContents.send('detectKeyboardShortcut')
     } else {
       return false

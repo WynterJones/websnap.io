@@ -10,5 +10,5 @@ $(document).on('click', '#takeThumbnail', function () { component.screenshot($('
 $(document).on('click', '#changeFolder', function () { events.changeFolder() })
 $(document).on('click', '#settings', function () { events.openSettings() })
 $(document).on('click', '#closeSettings, #closeHelp', function () { events.close() })
-$(document).on('change', '#settingsOptionClipboard', function () { events.toggleClipboardShortcut() })
-$(document).on('change', '#settingsOptionStartup', function () { events.toggleOnStartup() })
+$(document).on('change', '#settingsOptionClipboard', function () { events.toggleClipboardShortcut(this) })
+$(document).on('change', '#settingsOptionStartup', function () { events.toggleOnStartup(this) })

@@ -114,6 +114,12 @@ body {
   font-size: 1.2em
 }
 
+#buttonBar .ui.button i,
+#buttonBar .ui.button i::after,
+#buttonBar .ui.button i::before {
+  cursor: pointer !important;
+}
+
 #buttonBar .ui.button {
   color: #fff;
   background: var(--main-color);
@@ -156,15 +162,19 @@ body {
   top: 12px;
   right: 15px;
   font-size: 1.2em;
-  cursor: pointer;
   z-index: 999;
   color: var(--text-color-solid)
+}
+
+.closeIcon,
+.closeIcon::after,
+.closeIcon::before {
+  cursor: pointer !important;
 }
 
 #closeApp {
   top: 38px;
   font-size: 1.15em;
-  cursor: pointer;
 }
 
 .closeIcon:hover {

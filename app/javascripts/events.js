@@ -44,9 +44,9 @@ const events = {
     $('#website').focus()
   },
 
-  toggleClipboardShortcut: () => {
+  toggleClipboardShortcut: (_this) => {
     let checkData
-    if (this.checked) {
+    if (_this.checked) {
       checkData = true
     } else {
       checkData = false
@@ -54,9 +54,9 @@ const events = {
     store.set('check_clipboard', checkData)
   },
 
-  toggleOnStartup: () => {
+  toggleOnStartup: (_this) => {
     let checkData
-    if (this.checked) {
+    if (_this.checked) {
       checkData = true
       startupAutoLauncher.enable();
     } else {
@@ -67,7 +67,10 @@ const events = {
   },
 
   pasteClipboardIntoInput: () => {
-    $('#website').val(clipboard.readText('selection'))
+    if (store.get('check_clipboard') === true) {
+      ipcRenderer.send('activated')
+      $('#website').val(clipboard.readText('selection'))
+    }
   }
 
 
