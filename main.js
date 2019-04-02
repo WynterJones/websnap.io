@@ -34,7 +34,7 @@ const getWindowPosition = () => {
 }
 
 function createWindow () {
-  tray = new Tray(path.join(__dirname, './build/tray-iconTemplate.png'))
+  tray = new Tray(path.join(__dirname, './app/tray-iconTemplate.png'))
   mainWindow = new BrowserWindow({
     width: 400,
     height: 110,
@@ -42,10 +42,7 @@ function createWindow () {
     frame: false,
     show: true,
     resizable: false,
-    alwaysOnTop: true,
-    webPreferences: {
-      nodeIntegration: true
-    }
+    alwaysOnTop: true
   })
   
   mainWindow.loadURL(url.format({
