@@ -31,6 +31,14 @@ body {
   color: var(--text-color-solid);
 }
 
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
 [data-inverted][data-position~=top][data-tooltip]:before,
 [data-tooltip][data-inverted]:before,
 [data-tooltip][data-inverted]:after {
@@ -114,9 +122,11 @@ body {
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
 }
+
 #buttonBar .ui.button:first-child {
   border-left: none
 }
+
 #buttonBar .ui.button:last-child {
   border-right: none
 }

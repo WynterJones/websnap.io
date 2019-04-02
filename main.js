@@ -1,12 +1,10 @@
 'use strict'
 
 const electron = require('electron')
-const {app, Menu, BrowserWindow, Tray, nativeImage, ipcMain, ipcRenderer, remote, globalShortcut, clipboard} = electron
-const fs = require('fs')
+const {app, BrowserWindow, Tray, ipcMain, globalShortcut, clipboard} = electron
 const isURL = require('is-valid-http-url')
 const path = require('path')
 const url = require('url')
-const isDev = require('electron-is-dev')
 const autoUpdater = require('electron-updater').autoUpdater
 let mainWindow, tray
 
