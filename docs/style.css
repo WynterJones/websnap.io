@@ -1,0 +1,29 @@
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+body {
+  background-color: #fff;
+  padding-bottom: 150px;
+}
+
+.main.container {
+  margin-top: 7em;
+}
+
+.main.container p {
+  font-size: 1.3em
+}
+.ui.footer.segment {
+  margin: 5em 0em 0em;
+  padding: 3em 0em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+h1.ui.header {
+  font-size: 3.3em;
+  font-weight: 900
+}
