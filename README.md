@@ -1,4 +1,4 @@
-# WebSnap  🦄
+# WebSnap
 ### Website Screenshots in MacOS Menu Bar
 -----
 
