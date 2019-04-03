@@ -28,7 +28,7 @@ ipcMain.on('activated', () => { mainWindow.show() })
 const getWindowPosition = () => {
   const windowBounds = mainWindow.getBounds()
   const trayBounds = tray.getBounds()
-  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2) - 36)
+  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2) - 38)
   const y = Math.round(trayBounds.y + trayBounds.height)
   return {x: x, y: y}
 }
