@@ -39,6 +39,14 @@
 		"oT": 1,
 		"q": 100
 		},
+	"/images/ui-screencast.gif": {
+		"ft": 4194304,
+		"iS": 94956,
+		"oA": 0,
+		"oAP": "/images/ui-screencast.gif",
+		"oF": 0,
+		"opt": 0
+		},
 	"/index.html": {
 		"cB": 0,
 		"ft": 8192,
