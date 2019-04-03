@@ -9,6 +9,17 @@
 	],
 "creatorBuild": "29127",
 "files": {
+	"/images/favicon.png": {
+		"ft": 32768,
+		"iS": 12508,
+		"oA": 0,
+		"oAP": "/images/favicon.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
 	"/images/logo.png": {
 		"ft": 32768,
 		"iS": 15971,
@@ -27,6 +38,16 @@
 		"oA": 0,
 		"oAP": "/index.html",
 		"oF": 0
+		},
+	"/style-min.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/style-min-min.css",
+		"oF": 0,
+		"oS": 3
 		},
 	"/style.css": {
 		"aP": 1,
