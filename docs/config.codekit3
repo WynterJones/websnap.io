@@ -39,6 +39,17 @@
 		"oT": 1,
 		"q": 100
 		},
+	"/images/og-shareimage.png": {
+		"ft": 32768,
+		"iS": 91740,
+		"oA": 0,
+		"oAP": "/images/og-shareimage.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"/images/shareimage.png": {
 		"ft": 32768,
 		"iS": 38850,
