@@ -39,6 +39,17 @@
 		"oT": 1,
 		"q": 100
 		},
+	"/images/share-image.png": {
+		"ft": 32768,
+		"iS": 114549,
+		"oA": 0,
+		"oAP": "/images/share-image.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"/images/ui-screencast.gif": {
 		"ft": 4194304,
 		"iS": 94956,
